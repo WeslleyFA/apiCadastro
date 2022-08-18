@@ -1,10 +1,11 @@
 package com.weslley.cadastro.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class User implements Serializable {
@@ -16,6 +17,10 @@ public class User implements Serializable {
     private String email;
     private String celular;
     private String senha;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public User(){}
 
@@ -65,6 +70,10 @@ public class User implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     @Override
