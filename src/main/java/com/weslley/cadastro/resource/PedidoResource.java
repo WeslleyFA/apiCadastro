@@ -15,17 +15,17 @@ import java.util.List;
 @RequestMapping(value="/pedidos")
 public class PedidoResource {
     @Autowired
-    private PedidoService PedidoService;
+    private PedidoService pedidoService;
 
     @GetMapping
     public ResponseEntity<List<Pedido>> findAll(){
-        List<Pedido> Pedidos = PedidoService.findAll();
-        return  ResponseEntity.ok().body(Pedidos);
+        List<Pedido> pedidos = pedidoService.findAll();
+        return  ResponseEntity.ok().body(pedidos);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Pedido> findById(@PathVariable Long id){
-        Pedido Pedido = PedidoService.findById(id);
-        return ResponseEntity.ok().body(Pedido);
+        Pedido pedido = pedidoService.findById(id);
+        return ResponseEntity.ok().body(pedido);
     }
 }

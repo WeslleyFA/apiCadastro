@@ -15,17 +15,17 @@ import java.util.List;
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
     @Autowired
-    private CategoriaService CategoriaService;
+    private CategoriaService categoriaService;
 
     @GetMapping
     public ResponseEntity<List<Categoria>> findAll(){
-        List<Categoria> Categorias = CategoriaService.findAll();
-        return  ResponseEntity.ok().body(Categorias);
+        List<Categoria> categorias = categoriaService.findAll();
+        return  ResponseEntity.ok().body(categorias);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Categoria> findById(@PathVariable Long id){
-        Categoria Categoria = CategoriaService.findById(id);
-        return ResponseEntity.ok().body(Categoria);
+        Categoria categoria = categoriaService.findById(id);
+        return ResponseEntity.ok().body(categoria);
     }
 }
