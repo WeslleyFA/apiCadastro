@@ -2,6 +2,7 @@ package com.weslley.cadastro.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.weslley.cadastro.repositories.enums.StatusPedido;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,12 +23,15 @@ public class Pedido implements Serializable {
     @ManyToOne
     private User cliente;
 
+    private Integer status;
+
     public Pedido() {}
 
-    public Pedido(Long id, Instant momento, User cliente) {
+    public Pedido(Long id, Instant momento, User cliente, StatusPedido status) {
         this.id = id;
         this.momento = momento;
         this.cliente = cliente;
+        setStatus(status);
     }
 
     public Long getId() {
@@ -52,6 +56,16 @@ public class Pedido implements Serializable {
 
     public void setCliente(User cliente) {
         this.cliente = cliente;
+    }
+
+    public StatusPedido getStatus() {
+        return StatusPedido.valueOf(status);
+    }
+
+    public void setStatus(StatusPedido status) {
+        if(status != null) {
+            this.status = status.getCodigo();
+        }
     }
 
     @Override

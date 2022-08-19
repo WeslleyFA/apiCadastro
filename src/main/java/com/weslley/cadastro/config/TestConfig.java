@@ -4,6 +4,7 @@ import com.weslley.cadastro.entities.Pedido;
 import com.weslley.cadastro.entities.User;
 import com.weslley.cadastro.repositories.PedidoRepository;
 import com.weslley.cadastro.repositories.UserRepository;
+import com.weslley.cadastro.repositories.enums.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +28,9 @@ public class TestConfig implements CommandLineRunner {
         User usuario2 = new User(null, "Fabio", "fabio@@", "2222", "dsdsdsd" );
 
 
-        Pedido p1 = new Pedido(null, Instant.parse("2019-06-20T19:53:07Z"), usuario);
-        Pedido p2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), usuario2);
-        Pedido p3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), usuario);
+        Pedido p1 = new Pedido(null, Instant.parse("2019-06-20T19:53:07Z"), usuario, StatusPedido.PAGO);
+        Pedido p2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), usuario2, StatusPedido.ENVIADO);
+        Pedido p3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), usuario,StatusPedido.ENVIADO);
 
 
         userRepository.saveAll(Arrays.asList(usuario,usuario2));
