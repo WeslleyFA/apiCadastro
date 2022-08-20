@@ -1,8 +1,7 @@
 package com.weslley.cadastro.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.weslley.cadastro.repositories.enums.StatusPedido;
+import com.weslley.cadastro.entities.enums.StatusPedido;
 
 import javax.persistence.*;
 import java.io.Serializable;

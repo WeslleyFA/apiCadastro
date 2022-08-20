@@ -1,4 +1,4 @@
-package com.weslley.cadastro.repositories.enums;
+package com.weslley.cadastro.entities.enums;
 
 public enum StatusPedido {
     PENDENTE(0),
