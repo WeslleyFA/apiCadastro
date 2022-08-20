@@ -1,13 +1,7 @@
 package com.weslley.cadastro.config;
 
-import com.weslley.cadastro.entities.Categoria;
-import com.weslley.cadastro.entities.Pedido;
-import com.weslley.cadastro.entities.Produto;
-import com.weslley.cadastro.entities.User;
-import com.weslley.cadastro.repositories.CategoriaRepository;
-import com.weslley.cadastro.repositories.PedidoRepository;
-import com.weslley.cadastro.repositories.ProdutoRepository;
-import com.weslley.cadastro.repositories.UserRepository;
+import com.weslley.cadastro.entities.*;
+import com.weslley.cadastro.repositories.*;
 import com.weslley.cadastro.entities.enums.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -31,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private PedidoProdutoRepository pedidoProdutoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -64,8 +61,14 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(usuario,usuario2));
         pedidoRepository.saveAll(Arrays.asList(p1,p2,p3));
-
         produtoRepository.saveAll(Arrays.asList(pr1,pr2,pr3,pr4));
+
+        PedidoProduto pp1 = new PedidoProduto(p1, pr1, 2, pr1.getPreco());
+        PedidoProduto pp2 = new PedidoProduto(p1, pr3, 1, pr3.getPreco());
+        PedidoProduto pp3 = new PedidoProduto(p2, pr3, 2, pr3.getPreco());
+
+        pedidoProdutoRepository.saveAll(Arrays.asList(pp1,pp2,pp3));
+
 
     }
 }

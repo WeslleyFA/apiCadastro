@@ -6,7 +6,9 @@ import com.weslley.cadastro.entities.enums.StatusPedido;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Pedido implements Serializable {
@@ -23,6 +25,9 @@ public class Pedido implements Serializable {
     private User cliente;
 
     private Integer status;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<PedidoProduto> itens = new HashSet<>();
 
     public Pedido() {}
 
@@ -55,6 +60,10 @@ public class Pedido implements Serializable {
 
     public void setCliente(User cliente) {
         this.cliente = cliente;
+    }
+
+    public Set<PedidoProduto> getItens() {
+        return itens;
     }
 
     public StatusPedido getStatus() {
