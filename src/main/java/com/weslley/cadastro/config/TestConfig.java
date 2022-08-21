@@ -73,5 +73,6 @@ public class TestConfig implements CommandLineRunner {
         p1.setPagamento(pg);
 
         pedidoRepository.save(p1);
+
     }
 }

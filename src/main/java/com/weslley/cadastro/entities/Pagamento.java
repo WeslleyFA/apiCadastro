@@ -1,5 +1,7 @@
 package com.weslley.cadastro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,6 +16,7 @@ public class Pagamento implements Serializable {
 
     @OneToOne
     @MapsId
+    @JsonIgnore
     private Pedido pedido;
 
     public Pagamento() {
