@@ -2,6 +2,7 @@ package com.weslley.cadastro.services;
 
 import com.weslley.cadastro.entities.User;
 import com.weslley.cadastro.repositories.UserRepository;
+import com.weslley.cadastro.services.exception.ResourceNotFindException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class UserService {
 
     public User findById(Long userID){
         Optional<User> obj = repository.findById(userID);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFindException(userID));
     }
 
     public User insert(User user){
