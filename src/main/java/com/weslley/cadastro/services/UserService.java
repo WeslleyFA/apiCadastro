@@ -2,8 +2,11 @@ package com.weslley.cadastro.services;
 
 import com.weslley.cadastro.entities.User;
 import com.weslley.cadastro.repositories.UserRepository;
+import com.weslley.cadastro.services.exception.DataBaseException;
 import com.weslley.cadastro.services.exception.ResourceNotFindException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +32,13 @@ public class UserService {
     }
 
     public void delete(Long userID){
-        repository.deleteById(userID);
+        try{
+            repository.deleteById(userID);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFindException(userID);
+        }catch (DataIntegrityViolationException e){
+            throw new DataBaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User novoUser){

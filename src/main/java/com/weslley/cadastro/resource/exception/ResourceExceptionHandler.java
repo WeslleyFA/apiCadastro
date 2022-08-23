@@ -1,5 +1,6 @@
 package com.weslley.cadastro.resource.exception;
 
+import com.weslley.cadastro.services.exception.DataBaseException;
 import com.weslley.cadastro.services.exception.ResourceNotFindException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,4 +20,13 @@ public class ResourceExceptionHandler {
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
+
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<StandardError> dataBase(DataBaseException e, HttpServletRequest request) {
+        String error = "Erro no banco de dados";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
 }
