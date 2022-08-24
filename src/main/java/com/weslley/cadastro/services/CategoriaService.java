@@ -3,6 +3,7 @@ package com.weslley.cadastro.services;
 import com.weslley.cadastro.entities.Categoria;
 
 import com.weslley.cadastro.repositories.CategoriaRepository;
+import com.weslley.cadastro.services.exception.ResourceNotFindException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,8 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public Categoria findById(Long CategoriaID){
-        Optional<Categoria> obj = repository.findById(CategoriaID);
-        return obj.get();
+    public Categoria findById(Long categoriaID){
+        Optional<Categoria> obj = repository.findById(categoriaID);
+        return obj.orElseThrow(() -> new ResourceNotFindException(categoriaID));
     }
 }
