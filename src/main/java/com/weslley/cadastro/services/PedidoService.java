@@ -4,6 +4,7 @@ import com.weslley.cadastro.entities.Pedido;
 import com.weslley.cadastro.entities.User;
 import com.weslley.cadastro.repositories.PedidoRepository;
 import com.weslley.cadastro.repositories.UserRepository;
+import com.weslley.cadastro.services.exception.ResourceNotFindException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,6 @@ public class PedidoService {
 
     public Pedido findById(Long pedidoID){
         Optional<Pedido> obj = repository.findById(pedidoID);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFindException(pedidoID));
     }
 }
